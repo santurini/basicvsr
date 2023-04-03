@@ -1,0 +1,79 @@
+{   
+    "dataloader": {
+        "cpu_w": 0,
+        "path": "/mnt/hdd/dataset/REDS",
+        "crop_size": 256,
+        "seq": 15,
+        "size": 0.8,
+        "batch_size": 4,
+        "augmentation": {
+            "gaussian": {
+                "kernel": [7, 9, 11, 13, 15, 17, 19, 21],
+                "sigma": [0.2, 3]
+            },
+            "resize": {
+                "scale": [0.15, 1.5] 
+            },
+            "jpeg": {
+                "quality": [30, 95]
+            },
+            "videocompression": {
+                "codec": "h264",
+                "bitrate": 1e4
+            },
+            "gaussian_2": {
+                "kernel": [7, 9, 11, 13, 15, 17, 19, 21],
+                "sigma": [0.2, 3]              
+            },
+            "resize_2": {
+                "scale": [0.3, 1.2]
+            },
+            "jpeg_2": {
+                "quality": [30, 95]
+            },
+            "gaussian_3": {
+                "kernel": [7, 9, 11, 13, 15, 17, 19, 21],
+                "sigma": [0.2, 3]              
+            },
+            "videocompression_2": {
+                "codec": "h264",
+                "bitrate": 1e4
+            },
+            "fixedresize": {
+                "height": 64,
+                "width": 64
+            }
+
+        }
+    },
+    "optimizer": {
+        "name": "Adam",
+        "lr": 1e-4
+    },
+    "scheduler": {
+        "name": "cosine",
+        "T": 1500,
+        "min_lr": 1e-7
+    },
+    "trainer": {
+        "device": "gpu",
+        "n_devices": 2,
+        "epochs": 1500,
+        "strategy": "deepspeed_stage_3_offload",
+        "precision": "16-mixed",
+        "ckpt_path": null
+    },
+    "model":{
+        "name": "realbasicvsr",
+        "args":{
+            "mid_ch": 64,
+            "blocks": 20,
+            "cl_blocks": 20,
+            "scale": 4,
+            "threshold": 1.0,
+            "mirror": true
+        }
+
+    }
+
+}
