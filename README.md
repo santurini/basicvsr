@@ -1,1 +1,1 @@
-# BasicVSR (ours) implementation
+# BasicVSR implementation
